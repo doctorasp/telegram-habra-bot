@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+        <meta charset="utf-8">
+         <script>
+            var url = 'https://api.vk.com/method/wall.get?owner_id=-2355375&count=15&filter=all&v=5.45&callback=?';
+            var answer;var movieURL;
+             
+$(document).ready(function()
+{   
+  $.ajax
+  ({
+        url: url,                
+        type: 'get',
+        crossDomain: true,
+        dataType: 'json',
+        success: function(response)
+        {
+            answer = response;
+            answer.response.items.forEach(function(item, i){
+            
+            if((item.text != 'undefined') && (item.text !== ''))
+            {
+                $('div').append(i+' '+item.text+'<br>');
+            }
+                          
+            if((item.attachments!= null) && (item.attachments[0].type == "photo")){
+                  $('div').append(`<img src="${item.attachments[0].photo.photo_604}"></img><br>`);
+                console.log('+');
+            
+            }
+                else
+                    if((item.attachments!= null) && (item.attachments[0].type == "video")){
+                        movieURL = item.attachments[0].video.owner_id+'_'+item.attachments[0].video.id;
+                        $('div').append(`<a href ="http://vk.com/video${movieURL}">${item.attachments[0].video.title}</a><br>`);
+                    }
+            });            
+        },
+        error: function(error)
+        {
+            console.log(error);
+        }
+    }); 
+});
+        </script>
+    </head>
+    <body>
+        <div>
+            <p>
+                Wall
+            </p>
+        </div>
+    </body>
+</html>
