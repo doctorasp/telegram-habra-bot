@@ -7,7 +7,6 @@ var cheerio = require('cheerio');
 var flatten = require('array-flatten')
 var $ = require("jquery");
 var url_habra = 'https://api.vk.com/method/wall.get?owner_id=-20629724&count=50&filter=all&v=5.45&callback=?';
-var url_hn = 'http://hi-news.ru/';
 
 var token = '289136356:AAFXe1DWn4B8Y5BpBs70KKFqmv6PbT49zLk';
 var botOptions = {
